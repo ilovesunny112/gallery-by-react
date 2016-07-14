@@ -52,10 +52,10 @@ class ImgFigure extends React.Component {
 	// imgfigure 点击处理函数
 	handleClick(e) {
 
-		console.log(this)
-		this.props.inverse();
+
 
 		if (this.props.arrange.isCenter) {
+			console.log(this)
 			this.props.inverse();
 		} else {
 			this.props.center();
@@ -77,8 +77,8 @@ class ImgFigure extends React.Component {
 
 		}
 		if (this.props.arrange.rotate) {
-			['-moz-', '-ms-', '-webkit-', ''].forEach(function(value, index) {
-				styleObj[value + "transform"] = "rotate(" + this.props.arrange.rotate + "deg)";
+			['Moz', 'ms', 'Webkit', ''].forEach(function(value, index) {
+				styleObj[value + "Transform"] = "rotate(" + this.props.arrange.rotate + "deg)";
 			}.bind(this))
 
 
@@ -97,7 +97,7 @@ class ImgFigure extends React.Component {
 				</figcaption>
 				<div className="img-back" onClick = {this.handleClick}>
 					<p>
-						{this.props.data.desc}
+						{this.props.data.description}
 					</p>
 				</div>
 			</figure>
