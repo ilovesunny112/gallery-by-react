@@ -31,9 +31,13 @@ config.module.loaders.push({
   test: /\.(js|jsx)$/,
   loader: 'react-hot!babel-loader',
   include: [].concat(
-    config.additionalPaths,
-    [ path.join(__dirname, '/../src') ]
+    config.additionalPaths, [path.join(__dirname, '/../src')]
   )
 });
+config.module.loaders.push({
+  test: /\.(eot|woff|svg|ttf)$/,
+  loader: "file-loader"
+});
+
 
 module.exports = config;

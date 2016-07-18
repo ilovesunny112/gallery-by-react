@@ -41,11 +41,63 @@ function get30DegRandom() {
 	// return 50
 }
 
+// var ControllerUnit = React.createClass({
+// 			handleClick: function(e) {
+// 				e.stopPropagation;
+// 				e.preventDefault();
+// 			},
+// 			render: function() {
+// 					return (
+// 							<span className="controller-unit" ><span>
+// 					);
+// 			}
+// });
+
+class ControllerUnit extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+	}
+
+	handleClick(e) {
+		e.stopPropagation();
+		e.preventDefault();
+
+		// 如果点击是选中态按钮则反转 否则居中 
+
+		if (this.props.arrange.isCenter) {
+			this.props.inverse()
+			console.log(1);
+		} else {
+			this.props.center()
+		}
+		console.log(e);
+
+
+	}
+	render() {
+
+		var controllerUnitClassName = "controller-unit";
+		if (this.props.arrange.isCenter) {
+			controllerUnitClassName += " is-center";
+			console.log(1);
+
+		}
+		if (this.props.arrange.isInverse) {
+			controllerUnitClassName += " is-inverse";
+			console.log(2);
+		}
+		return (
+			<span className={controllerUnitClassName} onClick={this.handleClick}  ><i className="iconfont"></i></span>
+		);
+	}
+}
+
 class ImgFigure extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.handleClick = this.handleClick.bind(this)
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 
@@ -324,7 +376,9 @@ class AppComponent extends React.Component {
 					isCenter: false
 				}
 			}
-			imgFigures.push(<ImgFigure data={value} ref={'imgFigure'+index} arrange={this.state.imgsArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)} />);
+			imgFigures.push(<ImgFigure data={value} onClick={this.handleClick} ref={'imgFigure'+index} arrange={this.state.imgsArrangeArr[index]} inverse={this.inverse(index)} center={this.center(index)} />);
+			controllerUnits.push(<ControllerUnit inverse={this.inverse(index)} center={this.center(index)}  arrange={this.state.imgsArrangeArr[index]}   onClick={this.handleClick}    />);
+
 		}.bind(this));
 
 		return (
